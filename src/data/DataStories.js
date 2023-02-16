@@ -48,3 +48,5 @@ export const dataStories = [
     image: 'https://source.unsplash.com/random/449x',
   },
 ];
+
+export const sizeOneItem = 145;

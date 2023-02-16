@@ -18,3 +18,19 @@ video {
 body {
   min-height: 100vh;
 }
+
+body .css-1d6wzja-MuiButton-startIcon {
+  margin: 0px;
+}
+
+body .css-5zd7kf-MuiButtonBase-root-MuiButton-root:hover,
+body .css-33y8yh-MuiButtonBase-root-MuiButton-root:hover {
+  background-color: white;
+}
+
+body .css-5zd7kf-MuiButtonBase-root-MuiButton-root {
+  padding: 0px;
+}
+body .css-33y8yh-MuiButtonBase-root-MuiButton-root {
+  padding: 0px;
+}
