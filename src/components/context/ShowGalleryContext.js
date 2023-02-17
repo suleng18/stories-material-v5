@@ -1,3 +1,4 @@
+import { dataStories } from 'data/DataStories';
 import { createContext, useState } from 'react';
 
 const ShowGalleryContext = createContext();
@@ -10,7 +11,7 @@ const ShowGalleryProvider = ({ children }) => {
   };
 
   return (
-    <ShowGalleryContext.Provider value={{ showGallery, handleShowGallery }}>
+    <ShowGalleryContext.Provider value={{ showGallery, handleShowGallery, dataStories }}>
       {children}
     </ShowGalleryContext.Provider>
   );

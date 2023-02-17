@@ -29,7 +29,7 @@ const StoryItem = ({ item }) => {
           width: '100%',
           height: '100%',
           objectFit: 'cover',
-          borderRadius: '10px',
+          borderRadius: '16px',
         }}
         src={item.image}
         alt={item.time}

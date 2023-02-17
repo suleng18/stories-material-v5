@@ -109,8 +109,8 @@ const StoryBox = ({ dataStories, setStorySelected }) => {
         </Box>
         {dataStories.length > 0 &&
           dataStories.map((item, index) => (
-            <div onClick={() => setStorySelected(item)}>
-              <StoryItem item={item} key={index}></StoryItem>
+            <div key={index} onClick={() => setStorySelected(item)}>
+              <StoryItem item={item}></StoryItem>
             </div>
           ))}
       </Box>
