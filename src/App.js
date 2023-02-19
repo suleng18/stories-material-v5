@@ -25,7 +25,12 @@ function App() {
         <Header>Stories</Header>
         <StoryBox setStorySelected={setStorySelected} dataStories={dataStories}></StoryBox>
       </Box>
-      {showGallery && <ShowGalleryStory storySelected={storySelected}></ShowGalleryStory>}
+      {showGallery && (
+        <ShowGalleryStory
+          storySelected={storySelected}
+          setStorySelected={setStorySelected}
+        ></ShowGalleryStory>
+      )}
     </>
   );
 }
