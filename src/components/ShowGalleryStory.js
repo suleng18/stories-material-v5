@@ -1,4 +1,4 @@
-import { Button, Typography } from '@mui/material';
+import { Button, CardMedia, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import React, { useContext, useState } from 'react';
 import ButtonArrow from './ButtonArrow';
@@ -12,30 +12,30 @@ const ShowGalleryStory = (props) => {
   const [transformSmaller, setTransformSmaller] = useState();
   const [transformBigger, setTransformBigger] = useState();
 
+  const [translateX, setTranslateX] = useState(0);
+
   const indexImageSelected = dataStories.findIndex((item) => item.image === storySelected.image);
-  console.log('🚀 ~ indexImageSelected', indexImageSelected);
 
   const handleClickNextStory = () => {
     setStorySelected(dataStories[indexImageSelected + 1]);
-    setTransformSmaller({ transform: 'translateX(-100px) scale(0.5)', transitionDuration: '3s' });
-    setTransformBigger({ transform: 'translateX(-100px) scale(1.5)', transitionDuration: '3s' });
+    setTranslateX((x) => x - 480);
   };
 
   const handleClickPrevStory = () => {
+    if (storySelected.id === 1) return;
     setStorySelected(dataStories[indexImageSelected - 1]);
+    setTranslateX((x) => x + 480);
   };
 
   return (
     <Box
       sx={{
-        display: 'block',
         zIndex: 20,
         width: '100%',
         height: '100%',
         position: 'fixed',
         top: 0,
         backgroundColor: '#1a1a1a',
-        transition: 'all 0.8s linear',
       }}
     >
       <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
@@ -65,123 +65,50 @@ const ShowGalleryStory = (props) => {
       <Box
         sx={{
           display: 'flex',
-          width: '100vw',
-          height: '520px',
-          position: 'relative',
-          overflowX: 'hidden',
+          width: '100%',
+          alignItems: 'center',
+          gap: '0 50px',
+          transform: `translateX(${translateX}px)`,
+          transitionDuration: '1s',
         }}
       >
-        <Box
-          sx={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            gap: '0 90px',
-            width: '100%',
-            height: '100%',
-          }}
-        >
+        {dataStories.map((item, index) => (
           <Box
+            className={storySelected.id === item.id ? 'scale-bigger' : 'scale-smaller'}
             sx={{
-              width: '220px',
-              height: '60%',
-              borderRadius: '16px',
+              display: 'flex',
+              flexShrink: 0,
+              width: '440px',
+              height: '600px',
+              borderRadius: '18px',
               overflow: 'hidden',
             }}
           >
-            {dataStories?.slice(indexImageSelected - 1, indexImageSelected).map((item, index) => (
-              <img
-                key={index}
-                src={item.image}
-                alt=""
-                style={{ height: '100%', width: '100%', objectFit: 'cover' }}
-              />
-            ))}
-          </Box>
-          <Box
-            sx={{
-              width: '420px',
-              height: '100%',
-              backgroundColor: 'gray',
-              borderRadius: '16px',
-              position: 'relative',
-              // ...transformSmaller,
-            }}
-          >
-            {indexImageSelected !== 0 && (
-              <Button
-                onClick={handleClickPrevStory}
-                startIcon={<ChevronLeftIcon></ChevronLeftIcon>}
-                variant="contained"
-                sx={{
-                  position: 'absolute',
-                  top: '50%',
-                  left: '-70px',
-                  backgroundColor: 'gray',
-                  minWidth: 0,
-                }}
-              ></Button>
-            )}
             <img
-              src={storySelected.image}
+              src={item.image}
               alt=""
-              style={{ height: '100%', width: '100%', objectFit: 'cover', borderRadius: '16px' }}
+              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
             />
-            {indexImageSelected < dataStories.length - 1 && (
-              <Button
-                onClick={() => handleClickNextStory()}
-                startIcon={<ChevronRightIcon></ChevronRightIcon>}
-                variant="contained"
-                sx={{
-                  position: 'absolute',
-                  top: '50%',
-                  right: '-70px',
-                  backgroundColor: 'gray',
-                  minWidth: 0,
-                }}
-              ></Button>
-            )}
           </Box>
-          <Box
-            sx={{
-              width: '220px',
-              height: '60%',
-              borderRadius: '16px',
-              overflow: 'hidden',
-            }}
-          >
-            {dataStories?.slice(indexImageSelected + 1).map((item, index) => {
-              if (index === 0) {
-                return (
-                  <img
-                    key={index}
-                    src={item.image}
-                    alt=""
-                    style={{
-                      height: '100%',
-                      width: '100%',
-                      objectFit: 'cover',
-                      // ...transformBigger,
-                    }}
-                  />
-                );
-              } else {
-                return (
-                  <img
-                    key={index}
-                    src={item.image}
-                    alt=""
-                    style={{
-                      height: '100%',
-                      width: '100%',
-                      objectFit: 'cover',
-                    }}
-                  />
-                );
-              }
-            })}
-          </Box>
-        </Box>
+        ))}
+      </Box>
+
+      <Box
+        sx={{
+          position: 'fixed',
+          display: 'flex',
+          width: '100%',
+          justifyContent: 'center',
+          gap: '0 550px',
+          top: '50%',
+        }}
+      >
+        <Button onClick={handleClickPrevStory} size="small" variant="contained">
+          Prev
+        </Button>
+        <Button onClick={handleClickNextStory} size="small" variant="contained">
+          Next
+        </Button>
       </Box>
     </Box>
   );

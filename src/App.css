@@ -34,3 +34,13 @@ body .css-5zd7kf-MuiButtonBase-root-MuiButton-root {
 body .css-33y8yh-MuiButtonBase-root-MuiButton-root {
   padding: 0px;
 }
+
+.scale-bigger {
+  transform: scale(1);
+  transition: all 0.5s linear;
+}
+
+.scale-smaller {
+  transform: scale(0.5);
+  transition: all 0.5s linear;
+}
